@@ -31,16 +31,24 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.EmptyBorder;
 
-/**문서화 주석
- * 작성자 : 김지희
+/**작성자 : 김지희
  * 작성일 : 2023-09-21
  * 버 전 : 1.1
- * 카페 키오스크 프로그램의 메인 클래스*/
+ * 
+ * CafeKiosk프로그램의 메인클래스
+ * 음료메뉴, 디저트메뉴 수량 지정해서 하단 장바구니 테이블에 담기, 합계로 메뉴와 총 금액 확인 가능
+ * 결제 전 메뉴나 수량 변경을 원할 시 장바구니의 해당 메뉴 삭제 가능
+ * 현금결제와 카드결제 중 하나를 선택
+ * 현금결제 선택 시 사용자가 처음 지불할 금액 입력과 거스름돈 출력
+ * 지불금액이 결제금액보다 적을 경우, 결제 완료 시 메시지출력
+ * 결제 완료 후 합계창과 장바구니 리셋
+ * */
 public class CafeKiosk extends JFrame{
 	
 	JFrame f=new JFrame();
 	
 	JTextField textField1, textField2, textField3, textField4, textField5, textField6, textField7, textField8;
+	// 디저트의 수량을 나타내는 텍스트필드 / 주석 기준 위는 음료, 아래는 디저트
 	JTextField textField11, textField12, textField13, textField14;
 	
 	//음료 개수 초기화 텍스트필드
@@ -52,7 +60,7 @@ public class CafeKiosk extends JFrame{
 	int tf6=0;
 	int tf7=0;
 	int tf8=0;
-	//디저트 개수 초기화 텍스트필드
+	//디저트 개수 초기화 / 주석 기준 위는 음료, 아래는 디저트
 	int tf11=0;
 	int tf12=0;
 	int tf13=0;
@@ -70,8 +78,10 @@ public class CafeKiosk extends JFrame{
 	DefaultTableModel model=new DefaultTableModel(heading,0);	//열은 heading, 행은 0으로 초기값 비움
 	JTable table = new JTable(model);
 	
-	public CafeKiosk() {
-		super("Cafe Order");
+	
+	/**카페키오스크 프로그램의 GUI*/
+	private CafeKiosk() {
+		setTitle("Cafe Kiosk");
 		getContentPane().setLayout(null);
 		
 		dessertpn = new JPanel();
@@ -689,13 +699,21 @@ public class CafeKiosk extends JFrame{
 		tfalltotal.setBounds(535, 86, 139, 91);
 		bottompn.add(tfalltotal);
 		
-		// 장바구니 리스트 삭제 버튼
+		// 장바구니 리스트 삭제 
+		Delete();
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(500, 10, 700, 850);
+		setVisible(true);
+	}
+	
+	/** 테이블에서 삭제하고자 하는 행을 선택 후 버튼 클릭 시 해당 행을 삭제
+	 * 삭제 후 합계영역에 삭제한 데이터의 금액(수량*가격)을 얻어와 제함
+	 * 삭제 할 데이터가 없는데('담기'한 데이터가 없을때 or 삭제할 행을 선택하지 않았을 때) 삭제버튼을 클릭했을 경우 경고메시지 출력
+	 * */
+	private void Delete() {
 		JButton delbt = new JButton("삭제");
 		delbt.addActionListener(new ActionListener() {
-			/** 테이블에서 삭제하고자 하는 행을 선택 후 버튼 클릭 시 해당 행을 삭제
-			 * 삭제 후 합계영역에 삭제한 데이터의 금액(수량*가격)을 얻어와 제함
-			 * 삭제 할 데이터가 없는데('담기'한 데이터가 없을때 or 삭제할 행을 선택하지 않았을 때) 삭제버튼을 클릭했을 경우 경고메시지 출력
-			 * */
 			public void actionPerformed(ActionEvent e) {
 				int selectrow=table.getSelectedRow();
 				if(selectrow>=0) {
@@ -716,11 +734,6 @@ public class CafeKiosk extends JFrame{
 		bottompn.add(delbt);
 
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(500, 10, 700, 850);
-		setVisible(true);
-		
-
 	}
 	
 	public static void main(String[] args) {

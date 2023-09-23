@@ -8,23 +8,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/** 문서화 주석
- * 작성자 : 김지희
+/**작성자 : 김지희
  * 작성일 : 2023-09-21
  * 버 전 : 1.1
  * dessert패널의 디저트 각각의 개수를 더하고 빼기, 수량을 정한 디저트를 하단 bottom 패널의 장바구니테이블에 담을 수 있는 액션리스너
+ * 수량을 더하지 않은 상태(0)에서 -버튼 클릭시 경고메시지 출력
+ * +버튼으로 수량 선택 후 담기버튼 클릭하면 하단 bottom패널의 table에 담은 메뉴 리스트 확인가능
  * */
 public class DessertListener implements ActionListener {	
 	private CafeKiosk cafe;
 
-    /**메인클래스(CafeKiosk)의 정보를 얻어옴*/
+    /** 메인클래스(CafeKiosk)의 정보를 얻어옴 */
     public DessertListener(CafeKiosk cafe) {	
         this.cafe = cafe;
     }
     
     
-    /** 수량을 더하지 않은 상태(0)에서 -버튼 클릭시 경고메시지 출력
-     * 	+버튼으로 수량 선택 후 담기버튼 클릭하면 하단 bottom패널의 table에 담은 메뉴 리스트 확인가능
+    /** dessert패널의 디저트 각각의 개수를 더하고 빼기, 수량을 정한 디저트를 하단 bottom 패널의 장바구니테이블에 담을 수 있는 액션리스너 
      * */
     public void actionPerformed(ActionEvent e) {
     	Component f = null;
