@@ -711,7 +711,7 @@ public class CafeKiosk extends JFrame{
 	 * 삭제 후 합계영역에 삭제한 데이터의 금액(수량*가격)을 얻어와 제함
 	 * 삭제 할 데이터가 없는데('담기'한 데이터가 없을때 or 삭제할 행을 선택하지 않았을 때) 삭제버튼을 클릭했을 경우 경고메시지 출력
 	 * */
-	private void Delete() {
+	public void Delete() {
 		JButton delbt = new JButton("삭제");
 		delbt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
